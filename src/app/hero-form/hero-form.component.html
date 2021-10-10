@@ -93,7 +93,7 @@
   <div style="margin-left: 4px">
   <div class="container">
       <h1>Hero Form</h1>
-      <form #heroForm2="ngForm">
+      <form #heroForm2="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="namer">Name</label>
           <input type="text" 
@@ -101,7 +101,7 @@
             id="namer" 
             required
             [(ngModel)]="model.name" 
-            name="name"
+            name="name1"
             #ctrl="ngModel"
             [title]="ctrl.untouched ? 'Enter a name' : 'Nice name!'"
           >
@@ -117,7 +117,10 @@
           Dirty: {{ ctrl.dirty }}<br>
           Invalid: {{ ctrl.invalid }}<br>
           Touched: {{ ctrl.touched }}<br> 
-          Errors: {{ ctrl.errors | json }}
+          Errors: {{ ctrl.errors | json }}<br>
+          form name1 field: {{ heroForm2.controls['name1']?.value }}<br>
+          form fields: {{ heroForm2.controls[''] | json }}<br>
+          Form valid: {{ heroForm2.form.valid | json }}
         </p>
 
         <div class="form-group">
@@ -142,8 +145,14 @@
           </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success"
+          [disabled]="!heroForm2.form.valid">
+          Submit
+        </button>
+
         <button type="button" class="btn" (click)="newHero(); heroForm2.reset()">New Hero</button>
+
+        <button type="button" class="btn" (click)="getFormData(heroForm2)">getFormData</button>
  
       </form>
   </div>

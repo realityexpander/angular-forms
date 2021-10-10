@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { Hero } from '../hero';
 
@@ -16,6 +17,7 @@ export class HeroFormComponent {
 
   submitted = false;
 
+
   onSubmit() { this.submitted = true; }
 
 
@@ -29,6 +31,16 @@ export class HeroFormComponent {
                            'Leslie Rollover');
     console.log('My hero is called ' + myHero.name); // "My hero is called SkyDog"
     return myHero;
+  }
+
+  getFormData(f: NgForm ) {
+    // console.log(f.controls['name1']?.value)
+
+    // Object.values(f.controls).forEach( ctl => {
+    //       console.log(ctl);
+    // } );
+    
+    console.log(f.value)
   }
 
   //////// NOT SHOWN IN DOCS ////////
